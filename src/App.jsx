@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import { useState } from "react";
+import Register from "./Components/Register";
+import Login from "./Components/Login";
+import NavBar from "./Components/Nav/NavBar";
+import Profile from "./Components/Profile";
+import Posts from "./Components/Post";
+import Messages from "./Components/Messages";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
+  const [token, setToken] = useState(
+    localStorage.getItem("token") ? localStorage.getItem("token") : ""
+  );
+  const [username, setUsername] = useState(
+    localStorage.getItem("username") ? localStorage.getItem("username") : ""
+  );
   return (
     <>
+      <header>
+        <NavBar setToken={setToken} setUsername={setUsername} />
+      </header>
+      <div id="container">
+        <div id="navbar">
+          <h1>
+            <span className="app-heading">Stranger's Things</span>
+          </h1>
+        </div>
+      </div>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <div id="main-section">
+          <Routes>
+            {/* Route for Home Componests */}
+            <Route path="/register" element={<Register />} />
+            <Route path="/posts" element={<Posts />} />
+            <Route path="/messages" element={<Messages />} />
+            <Route
+              path="/login"
+              element={
+                <Login
+                  token={token}
+                  setToken={setToken}
+                  setUsername={setUsername}
+                  username={username}
+                />
+              }
+            />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
-
-export default App

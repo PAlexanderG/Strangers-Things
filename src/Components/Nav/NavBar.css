@@ -1,0 +1,28 @@
+.nav-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 60px;
+  background-color: rgb(102, 0, 255);
+  padding: 0 20px;
+
+  & a {
+    font-weight: 500;
+    font-size: 20px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+  }
+
+  .app-heading > h1 {
+    color: blueviolet;
+  }
+
+  span {
+    color: blueviolet;
+  }
+
+  & a.active {
+    border-bottom: 2px solid white;
+    padding-bottom: 5px;
+  }
+}
